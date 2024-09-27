@@ -88,5 +88,8 @@ export default async function(event, { status }) {
   }, null, 2));
   await uploadLargeFileToS3(`build/${pkgName}/info.json`, join(dirPkg, 'info.json'));
 
+  // CLI resume looks for this message
+  status.log(`Complete.`);
+
   return pkgName;
 }
