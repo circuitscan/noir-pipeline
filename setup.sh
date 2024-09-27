@@ -5,3 +5,5 @@ mv /tmp/noirup /usr/local/bin
 curl -Lo /tmp/bbup https://raw.githubusercontent.com/AztecProtocol/aztec-packages/master/barretenberg/cpp/installation/bbup
 chmod +x /tmp/bbup
 mv /tmp/bbup /usr/local/bin
+
+apt install -y libc++-dev libc++abi-dev
