@@ -2,7 +2,7 @@ import {
   writeFileSync,
   statSync,
 } from 'node:fs';
-import {dirname, join} from 'node:path';
+import {dirname, join, resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 
 import {
@@ -42,8 +42,11 @@ export default async function(event, { status }) {
 
   writeFileSync(join(dirPkg, 'Nargo.toml'), event.payload.nargoToml);
   for(let file of event.payload.files) {
-    mkdirpSync(dirname(join(dirPkg, file.filename)));
-    writeFileSync(join(dirPkg, file.filename), file.content);
+    const filename = resolve(join(dirPkg, file.filename));
+    if(filename.slice(0, dirPkg.length) !== dirPkg)
+      throw new Error('invalid_filename');
+    mkdirpSync(dirname(filename));
+    writeFileSync(filename, file.content);
   }
 
   status.log(`Storing source zip...`);
