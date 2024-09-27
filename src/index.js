@@ -27,8 +27,6 @@ export default async function(event, { status }) {
   event.payload.nargoVersion = event.payload.nargoVersion || DEFAULT_NARGO;
   if(!VERSIONS.hasOwnProperty(event.payload.nargoVersion))
     throw new Error('invalid_nargo_version');
-  await execPromise(`noirup -v ${event.payload.nargoVersion}`);
-  await execPromise(`bbup -v ${VERSIONS[event.payload.nargoVersion]}`);
   const nargoVersionResult = await execPromise(`nargo --version`);
   const nargoVersion = nargoVersionResult.stdout.split('\n')[0].split('= ')[1];
   const bbVersion = await execPromise(`bb --version`);
