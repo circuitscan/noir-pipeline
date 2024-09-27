@@ -2,7 +2,8 @@ NARGO_VERSION=`node -e "process.stdout.write(require('../event.json').nargoVersi
 
 curl -L https://raw.githubusercontent.com/noir-lang/noirup/main/install | bash
 curl -L https://raw.githubusercontent.com/AztecProtocol/aztec-packages/master/barretenberg/cpp/installation/install | bash
-source ~/.bashrc
+echo "export PATH=\"\$PATH:/home/ec2-user/.bb:/home/ec2-user/.nargo\"" >> /home/ec2-user/.bashrc
+source /home/ec2-user/.bashrc
 
 # Check if NARGO_VERSION is empty
 if [ -z "$NARGO_VERSION" ]; then
@@ -36,4 +37,4 @@ fi
 bbup -v $BB_VERSION
 
 # For good measure
-source ~/.bashrc
+source /home/ec2-user/.bashrc
