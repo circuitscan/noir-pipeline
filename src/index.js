@@ -15,10 +15,24 @@ import {
 } from 'circuitscan-pipeline-runner';
 import toml from 'toml';
 
+const DEFAULT_NARGO = "0.33.0";
+const VERSIONS = {
+  "0.34.0": "0.55.0",
+  "0.33.0": "0.47.1",
+  "0.32.0": "0.46.1",
+  "0.31.0": "0.41.0",
+};
+
 export default async function(event, { status }) {
-  const nargoVersion = await execPromise(`nargo --version`);
+  event.payload.nargoVersion = event.payload.nargoVersion || DEFAULT_NARGO;
+  if(!VERSIONS.hasOwnProperty(event.payload.nargoVersion))
+    throw new Error('invalid_nargo_version');
+  await execPromise(`noirup -v ${event.payload.nargoVersion}`);
+  await execPromise(`bbup -v ${VERSIONS[event.payload.nargoVersion]}`);
+  const nargoVersionResult = await execPromise(`nargo --version`);
+  const nargoVersion = nargoVersionResult.stdout.split('\n')[0].split('= ')[1];
   const bbVersion = await execPromise(`bb --version`);
-  status.log(`Using nargo@${nargoVersion.stdout.split('\n')[0].split('= ')[1]}`);
+  status.log(`Using nargo@${nargoVersion}`);
   status.log(`Using bb@${bbVersion.stdout}`);
 
   const nargoToml = toml.parse(event.payload.nargoToml);
@@ -65,6 +79,8 @@ export default async function(event, { status }) {
     pkgName,
     type: 'noir',
     nargoToml,
+    nargoVersion,
+    bbVersion: bbVersion.stdout,
     soliditySize: statSync(contractPath).size,
     sourceSize: statSync(dirPkg + '-source.zip').size,
     pkgSize: statSync(dirPkg + '.zip').size,
