@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/circuitscan/noir-pipeline#readme",
   "dependencies": {
-    "circuitscan-pipeline-runner": "0.0.7",
+    "circuitscan-pipeline-runner": "0.0.8",
     "toml": "3.0.0"
   },
   "devDependencies": {

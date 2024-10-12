@@ -2642,10 +2642,10 @@ circom_runtime@0.1.25:
   dependencies:
     ffjavascript "0.3.0"
 
-circuitscan-pipeline-runner@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/circuitscan-pipeline-runner/-/circuitscan-pipeline-runner-0.0.7.tgz#db03b7f37481a70f703218b0e61620ff1e485223"
-  integrity sha512-Bc1N0dtDyMC2cRCCK1y1hA76juAmgCnaE0MLmtTOUOesjPZksle4AUw/Mae/9xWJPCPTp8hdunLVG1LS9z2D2Q==
+circuitscan-pipeline-runner@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/circuitscan-pipeline-runner/-/circuitscan-pipeline-runner-0.0.8.tgz#a1badc1ba2b6d3c056cf576e33c350ab42c34ce3"
+  integrity sha512-1JtW7BC/JFKyPyFLcvKsjiw/zVtUcwN8uo0jwMMjJt+dAPSLQ/0X96iXWOvzIijYU90d+Yt+lSBaLolULfr66g==
   dependencies:
     "@aws-sdk/client-s3" "^3.576.0"
     "@aws-sdk/lib-storage" "^3.576.0"
