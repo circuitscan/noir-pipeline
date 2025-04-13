@@ -17,6 +17,7 @@ import toml from 'toml';
 
 const DEFAULT_NARGO = "0.33.0";
 const VERSIONS = {
+  "1.0.0-beta.2": "0.72.1",
   "0.34.0": "0.55.0",
   "0.33.0": "0.47.1",
   "0.32.0": "0.46.1",
