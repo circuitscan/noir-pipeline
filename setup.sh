@@ -9,6 +9,10 @@ mv ./nargo /usr/local/bin
 dnf install docker -y
 systemctl start docker
 
+bb84() {
+  docker run --rm  -v "$(pwd)":/app -w /app "numtel/barretenberg:0.84.0" bb "$@"
+}
+export -f bb84
 bb72() {
   docker run --rm  -v "$(pwd)":/app -w /app "numtel/barretenberg:0.72.1" bb "$@"
 }
@@ -40,6 +44,8 @@ bb() {
     bb55 "$@"
   elif [ "$BBUP_VERSION" == "0.72.1" ]; then
     bb72 "$@"
+  elif [ "$BBUP_VERSION" == "0.84.0" ]; then
+    bb84 "$@"
   else
     echo "Unsupported BBUP_VERSION: $BBUP_VERSION"
   fi
