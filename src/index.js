@@ -15,14 +15,9 @@ import {
 } from 'circuitscan-pipeline-runner';
 import toml from 'toml';
 
-const DEFAULT_NARGO = "0.33.0";
+const DEFAULT_NARGO = "1.0.0-beta.3";
 const VERSIONS = {
   "1.0.0-beta.3": "0.84.0",
-  "1.0.0-beta.2": "0.72.1",
-  "0.34.0": "0.55.0",
-  "0.33.0": "0.47.1",
-  "0.32.0": "0.46.1",
-  "0.31.0": "0.41.0",
 };
 
 export default async function(event, { status }) {
@@ -69,8 +64,8 @@ export default async function(event, { status }) {
   cancelMemoryMonitor();
 
   status.log(`Exporting Solidity contract...`);
-  await execPromise(`bb write_vk -b ./target/${circuitName}.json -o ./target/vk`, { cwd: dirPkg });
-  await execPromise(`bb contract`, { cwd: dirPkg });
+  await execPromise(`bb write_vk -b ./target/${circuitName}.json -o ./target`, { cwd: dirPkg });
+  await execPromise(`bb write_solidity_verifier -k ./target/vk -o ./target/contract.sol`, { cwd: dirPkg });
 
   status.log(`Storing build artifacts...`);
   await uploadLargeFileToS3(`build/${pkgName}/verifier.sol`, contractPath);
