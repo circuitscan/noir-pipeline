@@ -15,8 +15,9 @@ import {
 } from 'circuitscan-pipeline-runner';
 import toml from 'toml';
 
-const DEFAULT_NARGO = "1.0.0-beta.3";
+const DEFAULT_NARGO = "1.0.0-beta.9";
 const VERSIONS = {
+  "1.0.0-beta.9": "1.2.1",
   "1.0.0-beta.3": "0.84.0",
 };
 
